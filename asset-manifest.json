@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Note-pen/static/css/main.679e8c04.css",
+    "main.js": "/Note-pen/static/js/main.7853fcb2.js",
+    "static/js/787.3e1d715e.chunk.js": "/Note-pen/static/js/787.3e1d715e.chunk.js",
+    "index.html": "/Note-pen/index.html",
+    "main.679e8c04.css.map": "/Note-pen/static/css/main.679e8c04.css.map",
+    "main.7853fcb2.js.map": "/Note-pen/static/js/main.7853fcb2.js.map",
+    "787.3e1d715e.chunk.js.map": "/Note-pen/static/js/787.3e1d715e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.679e8c04.css",
+    "static/js/main.7853fcb2.js"
+  ]
+}
