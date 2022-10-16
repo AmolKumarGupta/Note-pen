@@ -5,10 +5,8 @@ import Test from "./components/Test";
 function App() {
   return (
     <>
-      <Routes>
-        <Route index element={<Home/>} />
-        <Route path="test" element={<Test/>} />
-      </Routes>
+      <h1>Amol</h1>
+      <Home/>
     </>
   );
 }
