@@ -6,7 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        npprimary: 'red',
+        light: '#ffffff',
+        mixed: '#e5e5e5',
+        hard: '#2d2d2d'
       }
     },
   },
