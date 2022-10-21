@@ -1,13 +1,20 @@
+import { useState } from "react";
 
 export default function Navbar(){
+    const [state, setState] = useState(false);
+
+    const handleToggle = ()=>{
+        setState( (prev: boolean )=> !prev );
+    }
+
     return (
         <>
-        <nav className="bg-hard text-mixed border-[1px] border-hard px-2 md:px-4 lg:px-0 lg:fixed lg:h-full lg:w-[280px]">
-            <h1 className="text-light text-lg font-bold py-3 lg:px-4 lg:border-b-[1px]">Note pen</h1>
-            <ul>
-                <li className="lg:px-4 lg:py-2 nav_active">Scrapper</li>
-                <li className="lg:px-4 lg:py-2">Test</li>
-                <li className="lg:px-4 lg:py-2">qweuowqeuoieu wqeoui</li>
+        <nav className="bg-hard text-mixed border-[1px] border-hard rounded-sm lg:px-0 lg:fixed lg:h-full lg:w-[280px]">
+            <h1 className="text-light text-lg font-bold py-3 px-2 lg:px-4 border-b-[1px] rounded-sm">Note pen <span onClick={handleToggle} className="float-right lg:hidden">0</span></h1>
+            <ul className={`px-2 lg:px-0 h-0 overflow-hidden ${ state?'h-full':'' } lg:h-full`}>
+                <li className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer ">Scrapper</li>
+                <li className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer nav_active">Test</li>
+                <li className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer">qweuowqeuoieu wqeoui</li>
             </ul>
         </nav>
         </>
