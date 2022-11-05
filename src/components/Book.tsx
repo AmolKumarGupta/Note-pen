@@ -16,8 +16,10 @@ export default function Book(){
 
     return (
         <>
-        <div> <button onClick={()=>dispatch(add(textRef.current?.innerText))} >Save</button></div>
-        <div ref={textRef} contentEditable="true" className="lg:fixed lg:w-full lg:h-full"></div>
+        <div className="text-right">
+            <button onClick={()=>dispatch(add(textRef.current?.innerText))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded " >Save</button>
+        </div>
+        <div ref={textRef} contentEditable="true" className="absolute lg:fixed w-full lg:w-[calc(100%-280px)] h-full p-2 w-auto border-none focus-visible:outline-none"></div>
         </>
     );
 }
