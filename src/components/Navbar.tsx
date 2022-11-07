@@ -4,9 +4,9 @@ export default function Navbar(){
     const [state, setState] = useState(false);
 
     const handleToggle = ()=>{
-        setState( (prev: boolean )=> !prev );
+        setState(!state);
+        console.log(state)
     }
-
     return (
         <>
         <nav className="bg-hard text-mixed border-[1px] border-hard rounded-sm lg:px-0 lg:fixed lg:h-full lg:w-[280px]">
