@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Note-pen/static/css/main.e98466f5.css",
-    "main.js": "/Note-pen/static/js/main.9d6c5077.js",
+    "main.css": "/Note-pen/static/css/main.6138a4af.css",
+    "main.js": "/Note-pen/static/js/main.c7850c82.js",
     "static/js/787.3e1d715e.chunk.js": "/Note-pen/static/js/787.3e1d715e.chunk.js",
     "index.html": "/Note-pen/index.html",
-    "main.e98466f5.css.map": "/Note-pen/static/css/main.e98466f5.css.map",
-    "main.9d6c5077.js.map": "/Note-pen/static/js/main.9d6c5077.js.map",
+    "main.6138a4af.css.map": "/Note-pen/static/css/main.6138a4af.css.map",
+    "main.c7850c82.js.map": "/Note-pen/static/js/main.c7850c82.js.map",
     "787.3e1d715e.chunk.js.map": "/Note-pen/static/js/787.3e1d715e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e98466f5.css",
-    "static/js/main.9d6c5077.js"
+    "static/css/main.6138a4af.css",
+    "static/js/main.c7850c82.js"
   ]
 }
