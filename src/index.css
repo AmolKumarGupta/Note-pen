@@ -15,6 +15,6 @@
 
 @layer components{
     .nav_active{
-        @apply bg-mixed text-hard rounded-sm;
+        @apply bg-mixed text-hard rounded-sm mb-1;
     }
 }

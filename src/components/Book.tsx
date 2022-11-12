@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { add } from "../app/features/bookSlice";
+import { useAppDispatch, useAppSelector } from "../app/hook";
 
 export default function Book(){
     // @ts-ignore
-    const text: string = useSelector(s => s.book.text);
-    const dispatch = useDispatch();
+    const text: string = useAppSelector(s => s.book.text);
+    const dispatch = useAppDispatch();
     const textRef = useRef<HTMLDivElement>(null);
 
     useEffect( ()=>{
