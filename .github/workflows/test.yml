@@ -1,0 +1,39 @@
+name: Test Coverage
+
+on:
+  push:
+    branches:
+    - master
+    - features
+  pull_request:
+    branches:
+    - master
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+    - run: npm ci
+    - run: npm install
+    
+    - name: Test Coverage
+      run: |
+        SUMMARY="$(npm test -- --coverage --coverageReporters='text-summary' | tail -2 | head -1)"
+        TOKENS=($SUMMARY)
+        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+        
+    - name: Create a Badge
+      uses: schneegans/dynamic-badges-action@v1.0.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 4646bbbbf48ff59aab45b490d65c99bb
+        filename: notePenCoverage.json
+        label: Test Coverage
+        message: ${{ env.COVERAGE }}
+        color: green
+        
