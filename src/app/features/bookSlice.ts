@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchBook } from "../../helpers/localStorage";
 
-let state = {
-    text: JSON.parse(localStorage.getItem('book') as string)
-};
+let state = fetchBook();
 
 export const bookSlice = createSlice({
     name: 'book',
