@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bookShelfReducer from "./features/bookShelfSlice";
 import bookReducer from "./features/bookSlice";
+import currentBookSliceReducer from "./features/currentBookSlice";
 
 const store = configureStore({
     reducer: {
         book: bookReducer,
-        bookShelf: bookShelfReducer
+        bookShelf: bookShelfReducer,
+        currentBook: currentBookSliceReducer
     }
 });
 
