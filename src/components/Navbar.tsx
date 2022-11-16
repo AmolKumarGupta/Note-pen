@@ -1,31 +1,49 @@
-import { useState, useRef, FormEvent, useMemo } from "react";
+import { useState, useRef, FormEvent, useMemo, useEffect } from "react";
 import { addBook } from "../app/features/bookShelfSlice";
+import { changeCurrentBook } from "../app/features/currentBookSlice";
 import { useAppDispatch, useAppSelector } from "../app/hook";
 
 export default function Navbar(){
     const LABEL = 'New';
     const [state, setState] = useState(false);
+    const [isSaveBtnHidden, setIsSaveBtnHidden] = useState(true);
     const createBtnRef = useRef<HTMLDivElement>(null);
-    const [isHidden, setIsHidden] = useState(true);
-    // let [bookShelf, setBookShelf] = useState<BookShelf>([]);
-    let bookShelf: BookShelf = useAppSelector(s => s.bookShelf);
+    const [bookShelf, currentBook]: [BookShelf, string] = useAppSelector(s => [s.bookShelf, s.currentBook]);
     const dispatch = useAppDispatch();
 
+    useEffect( () => {
+        document.querySelectorAll(`.bookshelf`).forEach( (book) => {
+            if(book.textContent===currentBook) {
+                book.classList.add('nav_active');
+            }
+        });
+
+        return () => {
+            document.querySelectorAll(`.bookshelf`).forEach( (book) => {
+                book.classList.remove('nav_active');
+            });
+        }
+    }, [currentBook]);
+
     const bookListItem = useMemo( () => {
-        return bookShelf.map( book => <li key={book} className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer">{book}</li> );
-    }, [bookShelf]);
+        const activeBook = (ele: HTMLLIElement) => {
+            if( ele.textContent!==null ){
+                dispatch(changeCurrentBook(ele.textContent));
+            }
+        }
+        return bookShelf.map( book => <li key={book} onClick={ (e)=>activeBook(e.target as HTMLLIElement)} className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer bookshelf">{book}</li> );
+    }, [bookShelf, dispatch]);
 
     const handleToggle = ()=> setState( (prev: boolean )=> !prev );
 
     const changeNewText = (e: FormEvent<HTMLDivElement>)=>{
         let text: string|undefined|null = createBtnRef.current?.textContent;
-        (LABEL === text || text==="") ? setIsHidden(true) : setIsHidden(false);
+        (LABEL === text || text==="") ? setIsSaveBtnHidden(true) : setIsSaveBtnHidden(false);
     }
 
     const HandleEnter = (e: any) => {
         if(e.key === 'Enter') {
             e.preventDefault();
-            console.log(createBtnRef.current?.textContent);
             if(createBtnRef.current !== null) {
                 // createBtnRef.current.textContent = LABEL;
             }
@@ -50,7 +68,7 @@ export default function Navbar(){
         if( text!==undefined && text!==null && text!=="" && text.toLowerCase()!==LABEL.toLowerCase()) {
             // setBookShelf( prev => [...prev, text?.toLowerCase() as string] )
             dispatch(addBook(text.toLowerCase() as string));
-            setIsHidden(true)
+            setIsSaveBtnHidden(true)
         }
     }
 
@@ -63,9 +81,8 @@ export default function Navbar(){
                     <div ref={createBtnRef} className="w-full text-blue-200 focus-visible:outline-none focus-visible:border-none" contentEditable="true" suppressContentEditableWarning={true} onInput={ (e)=>{ changeNewText(e) } } onKeyPress={HandleEnter} onBlur={(e)=>{resetDefault(e)}}>
                         {LABEL}
                     </div>
-                    <div onClick={save} className={`float-right text-xl ${ isHidden?"hidden":"" }`}>+</div>
+                    <div onClick={save} className={`float-right text-xl ${ isSaveBtnHidden?"hidden":"" }`}>+</div>
                 </li>
-                <li className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer nav_active">Example</li>
                 { bookListItem }
             </ul>
         </nav>

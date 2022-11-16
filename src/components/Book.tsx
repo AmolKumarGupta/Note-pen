@@ -4,20 +4,30 @@ import { useAppDispatch, useAppSelector } from "../app/hook";
 
 export default function Book(){
     // @ts-ignore
-    const text: string = useAppSelector(s => s.book.text);
+    const [books, currentBook]: [Books, string] = useAppSelector(s => [s.book, s.currentBook]);
     const dispatch = useAppDispatch();
     const textRef = useRef<HTMLDivElement>(null);
 
     useEffect( ()=>{
+        let temp = textRef.current;
+
         if(textRef.current){
-            textRef.current.innerText = text;
+            if(books[currentBook]){
+                textRef.current.innerText = books[currentBook].data;
+            }
         }
-    }, [text]);
+
+        return () => {
+            if(temp){
+                temp.innerText = '';
+            }
+        }
+    }, [books, currentBook]);
 
     return (
         <>
         <div className="text-right">
-            <button onClick={()=>dispatch(add(textRef.current?.innerText))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded " >Save</button>
+            <button onClick={()=>dispatch(add({ name: currentBook, book: { ...books.currentBook, data: textRef.current?.innerText } }))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded " >Save</button>
         </div>
         <div ref={textRef} contentEditable="true" className="absolute lg:fixed w-full lg:w-[calc(100%-280px)] h-full p-2 border-none focus-visible:outline-none"></div>
         </>

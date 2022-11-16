@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchBook } from "../../helpers/localStorage";
+import { fetchBooks } from "../../helpers/localStorage";
 
-let state = fetchBook();
+let state: Books = fetchBooks();
 
 export const bookSlice = createSlice({
     name: 'book',
     initialState: state,
     reducers: {
         add: (state, action) => {
-            localStorage.setItem('book', JSON.stringify(action.payload));
+            state[action.payload.name] = action.payload.book;
+            localStorage.setItem('books', JSON.stringify(state));
         }
     }
 });
