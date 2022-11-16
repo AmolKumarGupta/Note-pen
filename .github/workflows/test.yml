@@ -1,13 +1,10 @@
 name: Test CI/CD
 
 on:
-  push:
-    branches:
-    - master
-    - features
   pull_request:
     branches:
     - master
+    - features
   
 jobs:
   build:
