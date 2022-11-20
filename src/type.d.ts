@@ -2,7 +2,8 @@
 interface Book {
     name?: string,
     title?: string,
-    data: string
+    data: string,
+    created_at?: string
 }
 
 interface Books {
