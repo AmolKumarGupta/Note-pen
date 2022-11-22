@@ -1,32 +1,29 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { add } from "../app/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "../app/hook";
 import useBookTitle from "../hooks/useBookTitle";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import '../quill.css';
 
 export default function Book(){
     // @ts-ignore
     const [book, currentBook]: [Book, string] = useAppSelector(s => [s.book, s.currentBook]);
     const dispatch = useAppDispatch();
-    const textRef = useRef<HTMLDivElement>(null);
+    const textRef = useRef<ReactQuill>(null);
     const Title = useBookTitle(currentBook, book?.title);
 
-    useEffect( ()=>{
-        let temp = textRef.current;
-
-        if(temp){
+    const text = useMemo(
+        () => {
             if(book){
-                if( book.data !== undefined ){
-                    temp.innerText = book.data;
+                if( book.data!==undefined ){
+                    return book.data;
                 }
             }
-        }
-
-        return () => {
-            if(temp){
-                temp.innerText = '';
-            }
-        }
-    }, [book, currentBook]);
+            return '';
+        },
+        [book]
+    );
 
     const underline = useMemo(
         ()=>{
@@ -42,10 +39,15 @@ export default function Book(){
         <>
         <div className="flex">
             { Title }
-            <button onClick={()=>dispatch(add([currentBook, {...book, data: textRef.current?.innerText as string}]))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded self-start" >Save</button>
+            <button onClick={()=>dispatch(add([currentBook, {...book, data: textRef.current?.value as string}]))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded self-start" >Save</button>
         </div>
         { underline }
-        <div ref={textRef} contentEditable="true" className="absolute lg:fixed w-full lg:w-[calc(100%-280px)] h-full p-2 border-none focus-visible:outline-none"></div>
+
+        <ReactQuill 
+        ref={textRef}
+        className="absolute lg:[position:unset] w-full h-full" 
+        value={text} 
+        />
         </>
     );
 }
