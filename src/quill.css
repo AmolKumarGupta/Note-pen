@@ -1,0 +1,14 @@
+
+    .ql-container{
+        font-size: 16px !important;
+    }
+
+    .ql-editor {
+        font-size: 16px !important;
+    }
+
+    @media screen and (min-width: 1024px) {    
+        .ql-editor, .ql-container {
+            min-height: 650px;
+        }
+    }

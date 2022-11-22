@@ -1,19 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchBooks } from "../../helpers/localStorage";
+import { fetchBook } from "../../helpers/localStorage";
 
-let state: Books = fetchBooks();
+let state: Book = fetchBook();
 
 export const bookSlice = createSlice({
     name: 'book',
     initialState: state,
     reducers: {
-        add: (state, action) => {
-            state[action.payload.name] = action.payload.book;
-            localStorage.setItem('books', JSON.stringify(state));
+        create: (state, action: {payload: string}) =>{
+            state = {
+                name: action.payload,
+                data: '',
+                created_at: new Date().toLocaleString()
+            }
+
+            localStorage.setItem(`book_${ action.payload }`, JSON.stringify(state));
+            return state;
+
+        },
+        add: (state, action: { payload: [string, object]}) => {
+            let [cur, book] = action.payload;
+
+            if( state ){
+                if( state.created_at===undefined ){
+                    book = { ...book, created_at: new Date().toLocaleString() }
+                }
+            }
+
+            state = {...state, ...book};
+            localStorage.setItem(`book_${ cur }`, JSON.stringify(state));
+            return state;
+        },
+        change: (state, action: {payload: string}) => {
+            let cur = action.payload;
+            state = JSON.parse(localStorage.getItem(`book_${ cur }`) as string);
+            // state = fetchBook();
+            return state;
         }
     }
 });
 
-export const {add} = bookSlice.actions;
+export const {create, add, change} = bookSlice.actions;
 
 export default bookSlice.reducer;

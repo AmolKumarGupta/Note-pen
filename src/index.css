@@ -17,4 +17,12 @@
     .nav_active{
         @apply bg-mixed text-hard rounded-sm mb-1;
     }
+
+    .ql-container{
+        font-size: 16px !important;
+    }
+
+    .ql-editor {
+        font-size: 16px !important;
+    }
 }

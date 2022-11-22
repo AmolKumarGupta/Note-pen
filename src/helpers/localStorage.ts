@@ -7,6 +7,22 @@ export function fetchBooks(){
     return books;
 }
 
+export function fetchBook(){
+    const currentBook: string = fetchCurrentBook();
+    let book: Book = {data: ''};
+    if( currentBook && currentBook!=='' ) {
+        book = JSON.parse(localStorage.getItem(`book_${ currentBook }`) as string);
+        if( book===null ){
+            book = {
+                data: '',
+                name: currentBook,
+                title: currentBook
+            };
+        }
+    }
+    return book;
+}
+
 export function fetchBookShelf(){
     let initialState: BookShelf = ["example"];
     if( localStorage.getItem("bookShelf")!==null ){

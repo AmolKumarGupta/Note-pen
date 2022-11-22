@@ -8,9 +8,10 @@ import { HashRouter } from "react-router-dom"
 
 test('render Book', async ()=>{
     render(<Provider store={store}><Book /></Provider>)
-
-    await screen.getByText('Save')
-    await userEvent.click(screen.getByText('Save'))
+    window.localStorage.clear();
+    
+    screen.getByText('Save')
+    userEvent.click(screen.getByText('Save'))
 
     render(
         <Provider store={store}>
