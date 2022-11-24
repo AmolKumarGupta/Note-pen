@@ -35,7 +35,7 @@ export default function Navbar(){
                 dispatch(change(ele.textContent));
             }
         }
-        return bookShelf.map( book => <li key={book} onClick={ (e)=>activeBook(e.target as HTMLLIElement)} className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer capitalize bookshelf">
+        return bookShelf.map( book => <li key={book} onClick={ (e)=>activeBook(e.target as HTMLLIElement)} className="px-2 lg:px-4 py-2 hover:cursor-pointer capitalize bookshelf">
             {book}
             <FontAwesomeIcon icon={faEllipsisV} 
             pull="right" 
@@ -90,7 +90,7 @@ export default function Navbar(){
 
     return (
         <>
-        <nav className="bg-hard text-mixed border-[1px] border-hard rounded-sm lg:px-0 lg:fixed lg:h-full lg:w-[280px]">
+        <nav className="bg-hard text-light border-[1px] border-hard rounded-sm lg:px-0 lg:fixed lg:h-full lg:w-[280px]">
             <h1 className="text-light text-lg font-bold py-3 px-2 lg:px-4 border-b-[1px] rounded-sm">
                 Note-pen
                 <span onClick={handleToggle} className="float-right lg:hidden">
@@ -99,10 +99,10 @@ export default function Navbar(){
             </h1>
             <ul className={`px-2 lg:px-0 overflow-hidden ${ state?'h-full':'h-0' } lg:h-full`}>
                 <li className="px-2 lg:px-4 py-2 hover:text-front hover:cursor-pointer flex">
-                    <div ref={createBtnRef} className="w-full text-blue-200 focus-visible:outline-none focus-visible:border-none" contentEditable="true" suppressContentEditableWarning={true} onInput={ (e)=>{ changeNewText(e) } } onKeyPress={HandleEnter} onBlur={(e)=>{resetDefault(e)}}>
+                    <div ref={createBtnRef} className="w-full text-mixed focus-visible:outline-none focus-visible:border-none" contentEditable="true" suppressContentEditableWarning={true} onInput={ (e)=>{ changeNewText(e) } } onKeyPress={HandleEnter} onBlur={(e)=>{resetDefault(e)}}>
                         {LABEL}
                     </div>
-                    <div onClick={save} className={`float-right text-xl ${ isSaveBtnHidden?"hidden":"" }`}>+</div>
+                    <div onClick={save} className={`float-right text-mixed text-xl ${ isSaveBtnHidden?"hidden":"" }`}>+</div>
                 </li>
                 { bookListItem }
             </ul>
