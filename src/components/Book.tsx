@@ -39,7 +39,7 @@ export default function Book(){
         <>
         <div className="flex bg-mixed text-hard">
             { Title }
-            <button onClick={()=>dispatch(add([currentBook, {...book, data: textRef.current?.value as string}]))} className="bg-hard text-mixed hover:bg-hard font-bold py-2 px-4 m-1 rounded self-start" >Save</button>
+            <button onClick={()=> currentBook && dispatch(add([currentBook, {...book, data: textRef.current?.value as string}]))} className="bg-hard text-mixed hover:bg-hard font-bold py-2 px-4 m-1 rounded self-start" >Save</button>
         </div>
         { underline }
 

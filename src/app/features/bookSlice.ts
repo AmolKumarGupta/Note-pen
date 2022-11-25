@@ -36,10 +36,15 @@ export const bookSlice = createSlice({
             state = JSON.parse(localStorage.getItem(`book_${ cur }`) as string);
             // state = fetchBook();
             return state;
+        },
+        remove: (state, {payload}: {payload: string}) => {
+            state = { data: '' };
+            localStorage.removeItem(`book_${ payload }`);
+            return state;
         }
     }
 });
 
-export const {create, add, change} = bookSlice.actions;
+export const {create, add, change, remove} = bookSlice.actions;
 
 export default bookSlice.reducer;
