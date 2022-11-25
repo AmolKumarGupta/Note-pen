@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        light: '#ffffff',
-        mixed: '#e5e5e5',
-        hard: '#2d2d2d'
+        light: 'var(--light)',
+        mixed: 'var(--mixed)',
+        hard: 'var(--hard)'
       }
     },
   },

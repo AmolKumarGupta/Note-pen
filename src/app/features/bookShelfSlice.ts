@@ -10,9 +10,14 @@ export const bookShelfSlice = createSlice({
         addBook: (state, {payload}: {payload: string}) => {
             state.push(payload);
             localStorage.setItem('bookShelf', JSON.stringify(state));
+        },
+        removeBook: (state, {payload}: {payload: string}) => {
+            state = state.filter( a => a!==payload );
+            localStorage.setItem('bookShelf', JSON.stringify(state));
+            return state;
         }
     }
 })
 
-export const {addBook} = bookShelfSlice.actions;
+export const {addBook, removeBook} = bookShelfSlice.actions;
 export default bookShelfSlice.reducer;

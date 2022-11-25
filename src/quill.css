@@ -9,6 +9,24 @@
 
     @media screen and (min-width: 1024px) {    
         .ql-editor, .ql-container {
-            min-height: 650px;
+            min-height: 850px;
         }
+    }
+
+    .ql-toolbar.ql-snow{
+        background-color: var(--mixed);
+    }
+
+    .ql-container.ql-snow{
+        background-color: var(--light);
+        color: var(--hard)
+    }
+
+    .ql-snow .ql-stroke, .ql-snow .ql-picker, .ql-snow .ql-picker.ql-expanded {
+        stroke: var(--hard);
+        color: var(--hard);
+    }
+
+    .ql-snow .ql-picker-options {
+        background-color: var(--mixed);
     }

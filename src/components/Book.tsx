@@ -28,7 +28,7 @@ export default function Book(){
     const underline = useMemo(
         ()=>{
             if( book ){
-                return book.created_at && <div className="pt-2 pb-1 px-2  text-sm">Created: { book.created_at }</div> 
+                return book.created_at && <div className="pt-2 pb-1 px-2 text-hard bg-mixed text-sm border-t-[1px] border-light">Created: { book.created_at }</div> 
             }
             return '';
         },
@@ -37,9 +37,9 @@ export default function Book(){
 
     return (
         <>
-        <div className="flex">
+        <div className="flex bg-mixed text-hard">
             { Title }
-            <button onClick={()=>dispatch(add([currentBook, {...book, data: textRef.current?.value as string}]))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded self-start" >Save</button>
+            <button onClick={()=> currentBook && dispatch(add([currentBook, {...book, data: textRef.current?.value as string}]))} className="bg-hard text-mixed hover:bg-hard font-bold py-2 px-4 m-1 rounded self-start" >Save</button>
         </div>
         { underline }
 
